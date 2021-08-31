@@ -10,6 +10,13 @@ var json = {
   time: "now",
 };
 
+const dotenv = require("dotenv");
+dotenv.config();
+
+var textapi = new meaningCloud({
+  application_key: process.env.API_KE,
+});
+
 const app = express();
 app.use(cors());
 // to use json
