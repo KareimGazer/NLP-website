@@ -7,9 +7,12 @@
   },
   "devDependencies": {
     "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "css-minimizer-webpack-plugin": "^3.0.2",
+    "mini-css-extract-plugin": "^2.2.0",
     "node-sass": "^6.0.1",
     "sass-loader": "^12.1.0",
     "scss-loader": "^0.0.1",
+    "terser-webpack-plugin": "^5.1.4",
     "webpack": "^5.51.1",
     "webpack-cli": "^4.8.0",
     "webpack-dev-server": "^4.0.0"

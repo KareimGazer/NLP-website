@@ -3,6 +3,10 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
+
 module.exports = {
   entry: "./src/client/index.js",
   module: {
@@ -10,7 +14,7 @@ module.exports = {
       { test: "/.svg$/", use: "svg-inline-loader" },
       {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       { test: "/.(js)$/", exclude: /node_modules/, use: "babel-loader" },
     ],
@@ -35,6 +39,10 @@ module.exports = {
       cleanStaleWebpackAssets: true,
       protectWebpackAssets: false,
     }),
+    new MiniCssExtractPlugin({ filename: "[name].css" }),
   ],
   mode: "production",
+  optimization: {
+    minimizer: [new TerserPlugin({}), new CssMinimizerPlugin()],
+  },
 };
