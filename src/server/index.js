@@ -13,10 +13,11 @@ var json = {
 };
 
 const dotenv = require("dotenv");
+// const { info } = require("console");
 dotenv.config();
 
 var key = {
-  application_key: process.env.API_KE,
+  application_key: process.env.API_KEY,
 };
 
 const app = express();
@@ -50,34 +51,20 @@ app.listen(8081, function () {
 
 // new code ---------------------------------------------------------------------
 
-var dataStore = {};
-// const info = {
-//   highlights: [],
-//   entities: [],
-//   concepts: [],
-// };
+var dataStore = {}; // main store for NLP info
 
-const url = "https://api.meaningcloud.com/sentiment-2.1";
+const url = "https://api.meaningcloud.com/sentiment-2.1"; // API url
 
+// main data for post req for meaning cloud API
 const data = {
-  key: "fc19aa9b81a3379f18d00f553ccf96d8",
-  //txt: "I love you",
+  //key: "fc19aa9b81a3379f18d00f553ccf96d8",
+  key: key.application_key,
+  // url for testing boilerplate
   url: "https://blog.waymo.com/2021/08/addressing-transit-mobility-gaps-what.html",
   lang: "en",
 };
 
-const callMeaningCloud = async (url, code, key) => {
-  const res = await fetch(url + code + key);
-
-  try {
-    const data = await res.json();
-    console.log(data);
-    return data;
-  } catch (error) {
-    console.log("error", error);
-  }
-};
-
+// calls post req and returns response from meaningCloud API
 const getData = async (url = "", datain = {}) => {
   console.log("Your data in", datain);
   const response = await fetch(url, {
@@ -92,9 +79,6 @@ const getData = async (url = "", datain = {}) => {
 
   try {
     const newData = await response.json();
-    // const extractedData = newData.sentence_list;
-    // console.log("extracted data: ", extractedData);
-    // return extractedData;
     console.log("new Data : ", newData);
     return newData;
   } catch (error) {
@@ -102,17 +86,22 @@ const getData = async (url = "", datain = {}) => {
   }
 };
 
-// this should be post
-app.get("/analyze", function (request, response) {
-  console.log("request to analyze", request);
-  getData(url, data).then((newData) => {
-    dataStore = newData;
-  });
+app.post("/analyze", function (req, res) {
+  console.log("Test request:", req.body.url);
+  var postData = data;
+  postData.url = req.body.url;
+  getData(url, data)
+    .then((newData) => {
+      dataStore = newData;
+    })
+    .then(() => {
+      summary = cookInfo();
+      res.json(summary);
+    });
 });
 
-app.get("/getInfo", function (request, response) {
-  // console.log("request to analyze", request);
-  console.log("processing data");
+function cookInfo() {
+  console.log("cooking info");
   highlights = dataStore.sentence_list
     .filter((sentence) => sentence.text.length > 100)
     .map((sentence) => ({ text: sentence.text, score: sentence.score_tag }));
@@ -123,7 +112,7 @@ app.get("/getInfo", function (request, response) {
   concepts = dataStore.sentimented_concept_list.map((concept) => ({
     form: concept.form,
     type: concept.type,
-  })); // use regex to get the type $ (end) at client
-  info = { highlights, entities, concepts };
-  response.send(info);
-});
+  }));
+  summary = { highlights, entities, concepts };
+  return summary;
+}
