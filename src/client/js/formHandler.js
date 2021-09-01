@@ -8,7 +8,11 @@ function handleSubmit(event) {
   let url = document.getElementById("name").value;
   if (Client.checkForURL(url)) {
     document.getElementById("results").innerHTML = "Loading . . .";
-    getData("http://localhost:8081/analyze", { url: url });
+    getData("http://localhost:8081/analyze", { url: url }).then(
+      (summaryData) => {
+        Client.formatInfo(summaryData);
+      }
+    );
   }
 }
 
@@ -29,7 +33,7 @@ const getData = async (url = "", datain = {}) => {
     // const extractedData = newData.sentence_list;
     // console.log("extracted data: ", extractedData);
     // return extractedData;
-    document.getElementById("results").innerHTML = newData;
+    //document.getElementById("results").innerHTML = newData;
     console.log("Post status : ", newData);
     return newData;
   } catch (error) {
