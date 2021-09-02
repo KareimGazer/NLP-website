@@ -1,5 +1,5 @@
 function formatInfo(inputText) {
-  console.log("::: Running formatInfo :::", inputText);
+  // console.log("::: Running formatInfo :::", inputText);
 
   const regex = /[A-Za-z]+$/g;
 
@@ -19,9 +19,9 @@ function formatInfo(inputText) {
   });
 
   // testing in console
-  console.log("highlights", highlights);
-  console.log("concepts", concepts);
-  console.log("entities", entities);
+  // console.log("highlights", highlights);
+  // console.log("concepts", concepts);
+  // console.log("entities", entities);
 
   const highlightsDIV = formatDiv(
     highlights,

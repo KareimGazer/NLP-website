@@ -81,7 +81,7 @@ const getData = async (url = "", datain = {}) => {
     // console.log("new Data : ", newData);
     return newData;
   } catch (error) {
-    // console.log("error", error);
+    console.log("error", error);
   }
 };
 

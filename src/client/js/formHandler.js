@@ -17,7 +17,7 @@ function handleSubmit(event) {
 }
 
 const getData = async (url = "", datain = {}) => {
-  console.log("Post url", datain);
+  // console.log("Post url", datain);
   const response = await fetch(url, {
     method: "POST",
     credentials: "same-origin",
@@ -34,7 +34,7 @@ const getData = async (url = "", datain = {}) => {
     // console.log("extracted data: ", extractedData);
     // return extractedData;
     //document.getElementById("results").innerHTML = newData;
-    console.log("Post status : ", newData);
+    // console.log("Post status : ", newData);
     return newData;
   } catch (error) {
     console.log("error", error);

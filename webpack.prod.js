@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const WorkboxPlugin = require("workbox-webpack-plugin");
 
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
@@ -40,6 +41,7 @@ module.exports = {
       protectWebpackAssets: false,
     }),
     new MiniCssExtractPlugin({ filename: "[name].css" }),
+    new WorkboxPlugin.GenerateSW(),
   ],
   mode: "production",
   optimization: {

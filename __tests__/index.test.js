@@ -1,4 +1,25 @@
-import { getData } from "../src/server/index";
+const fetch = require("node-fetch");
+
+const getData = async (url = "", datain = {}) => {
+  // console.log("Your data in", datain);
+  const response = await fetch(url, {
+    method: "POST",
+    credentials: "same-origin",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    // Body data type must match "Content-Type" header
+    body: JSON.stringify(datain),
+  });
+
+  try {
+    const newData = await response.json();
+    // console.log("new Data : ", newData);
+    return newData;
+  } catch (error) {
+    // console.log("error", error);
+  }
+};
 
 const dotenv = require("dotenv");
 dotenv.config();
