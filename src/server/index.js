@@ -57,7 +57,6 @@ const url = "https://api.meaningcloud.com/sentiment-2.1"; // API url
 
 // main data for post req for meaning cloud API
 const data = {
-  //key: "fc19aa9b81a3379f18d00f553ccf96d8",
   key: key.application_key,
   // url for testing boilerplate
   url: "https://blog.waymo.com/2021/08/addressing-transit-mobility-gaps-what.html",
@@ -66,7 +65,7 @@ const data = {
 
 // calls post req and returns response from meaningCloud API
 const getData = async (url = "", datain = {}) => {
-  console.log("Your data in", datain);
+  // console.log("Your data in", datain);
   const response = await fetch(url, {
     method: "POST",
     credentials: "same-origin",
@@ -79,15 +78,15 @@ const getData = async (url = "", datain = {}) => {
 
   try {
     const newData = await response.json();
-    console.log("new Data : ", newData);
+    // console.log("new Data : ", newData);
     return newData;
   } catch (error) {
-    console.log("error", error);
+    // console.log("error", error);
   }
 };
 
 app.post("/analyze", function (req, res) {
-  console.log("Test request:", req.body.url);
+  // console.log("Test request:", req.body.url);
   var postData = data;
   postData.url = req.body.url;
   getData(url, data)
@@ -101,7 +100,7 @@ app.post("/analyze", function (req, res) {
 });
 
 function cookInfo() {
-  console.log("cooking info");
+  // console.log("cooking info");
   highlights = dataStore.sentence_list
     .filter((sentence) => sentence.text.length > 100)
     .map((sentence) => ({ text: sentence.text, score: sentence.score_tag }));
@@ -116,3 +115,5 @@ function cookInfo() {
   summary = { highlights, entities, concepts };
   return summary;
 }
+
+module.exports = getData;
