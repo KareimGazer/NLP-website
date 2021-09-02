@@ -19,4 +19,4 @@ The backend uses MeaningCloud Natural Language Processing API and build with Nod
 This project was build with [Webpack V5](https://github.com/webpack/webpack). You can find more information about loaders and installed packages in `package.json` file in the root directory
 
 ## Testing
-Testing was done with [Jest](https://github.com/facebook/jest). Test modules can be found at __test__ folder.
+Testing was done with [Jest](https://github.com/facebook/jest). Test modules can be found at `__test__` folder in the root directory.
