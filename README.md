@@ -13,7 +13,7 @@ To get started:
 * type the url of your choice in the form input to bring you detailed analsis of the page in question.
 
 ## backend
-The backend uses MeaningCloud [Sentiment Analysis API](https://www.meaningcloud.com/developer/sentiment-analysis) and run Nodejs and Expresss.
+The backend uses MeaningCloud [Sentiment Analysis API](https://www.meaningcloud.com/developer/sentiment-analysis) and run using Nodejs and Expresss.
 
 ## Build Tool
 This project was build with [Webpack V5](https://github.com/webpack/webpack). You can find more information about loaders and installed packages in `package.json` file in the root directory
