@@ -10,6 +10,7 @@ To get started:
 * build with `npm run build-prod`
 * start server with `npm run start`
 * opne `dist/index.html`
+* type the url of your choice in the form input to bring you detailed analsis of the page in question.
 
 ## backend
 The backend uses MeaningCloud Natural Language Processing API and build with Nodejs and Expresss
